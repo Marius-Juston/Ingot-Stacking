@@ -255,9 +255,7 @@ class Viewer:
             to_position = algorithm.place(ingot)
 
             if to_position is None:
-                break
-
-            move_to(ingot, to_position, step=1, show_animation=self.show_animation)
+                move_to(ingot, to_position, step=1, show_animation=self.show_animation)            
 
         ctypes.windll.user32.MessageBoxW(0, "Finished!!", "Finish Message", 0)
 

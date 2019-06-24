@@ -254,8 +254,8 @@ class Viewer:
         for ingot in self.ingots:
             to_position = algorithm.place(ingot)
 
-            if to_position is None:
-                move_to(ingot, to_position, step=1, show_animation=self.show_animation)            
+            if to_position is not None:
+                move_to(ingot, to_position, step=1, show_animation=self.show_animation)
 
         ctypes.windll.user32.MessageBoxW(0, "Finished!!", "Finish Message", 0)
 

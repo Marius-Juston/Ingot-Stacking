@@ -19,7 +19,7 @@ class Viewer:
         "All Knowing Algorithm": AllKnowing
     }
 
-    def __init__(self, ax, width: tuple = (6, 24), height: tuple = (1, 8), number_of_shelves: int = 4,
+    def __init__(self, ax: Axes, width: tuple = (6, 24), height: tuple = (1, 8), number_of_shelves: int = 4,
                  shelve_spec: tuple = (36.5, 8), number_of_ingot: int = 10, air_gap_width: float = 1,
                  random_seed: int = 42,
                  stacking_algorithm: str = "Simple Stacking Algorithm", show_animation: bool = False) -> None:
@@ -81,9 +81,6 @@ class Viewer:
             self.ingot_cache.append(rect)
 
             x += (w + self.spacing)
-
-        # FIXME check if it is better to add the ingots individually or all in the same time?
-        # self.ax.add_collection(PatchCollection(self.ingots))
 
     def init_shelves(self):
         self.shelves.clear()
@@ -245,7 +242,7 @@ class Viewer:
     def get_stacking_algorithm(self) -> Stacker:
         return self.valid_stacking_algorithms[self.stacking_algorithm](self.shelves, self.air_gap_width)
 
-    def run(self, event):
+    def run(self, _):
         algorithm = self.get_stacking_algorithm()
         algorithm.setup(self.ingots)
 

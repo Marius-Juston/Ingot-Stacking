@@ -2,6 +2,8 @@ from random import uniform
 
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.axes import Axes
+from matplotlib.backend_bases import PickEvent
 from matplotlib.collections import PatchCollection
 from matplotlib.patches import Rectangle
 from matplotlib.widgets import AxesWidget, RadioButtons
@@ -9,8 +11,8 @@ from matplotlib.widgets import AxesWidget, RadioButtons
 
 class MyRadioButtons(RadioButtons):
     # https://stackoverflow.com/questions/55095111/displaying-radio-buttons-horizontally-in-matplotlib
-    def __init__(self, ax, labels, active=0, activecolor='blue', size=49,
-                 orientation="vertical", **kwargs):
+    def __init__(self, ax: Axes, labels: iter, active: int = 0, activecolor: str = 'blue', size: int = 49,
+                 orientation: str = "vertical", **kwargs):
         """
         Add radio buttons to an `~.axes.Axes`.
         Parameters
@@ -61,7 +63,7 @@ class MyRadioButtons(RadioButtons):
 
         self.connect_event('pick_event', self._clicked)
 
-    def _clicked(self, event):
+    def _clicked(self, event: PickEvent):
         if (self.ignore(event) or event.mouseevent.button != 1 or
                 event.mouseevent.inaxes != self.ax):
             return
@@ -69,7 +71,7 @@ class MyRadioButtons(RadioButtons):
             self.set_active(self.circles.index(event.artist))
 
 
-def up_down(rect: Rectangle, to: tuple, step=.1, interval=.001):
+def up_down(rect: Rectangle, to: tuple, step: float = .1, interval: float = .001):
     new_step = step
     if to[1] < rect.get_y():
         new_step *= -1
@@ -85,7 +87,7 @@ def up_down(rect: Rectangle, to: tuple, step=.1, interval=.001):
         plt.pause(interval)
 
 
-def diagonal(rect: Rectangle, to: tuple, step=.1, interval=.001):
+def diagonal(rect: Rectangle, to: tuple, step: float = .1, interval: float = .001):
     end = to[0]
 
     if to[0] < rect.get_x():
@@ -110,7 +112,7 @@ def diagonal(rect: Rectangle, to: tuple, step=.1, interval=.001):
         plt.pause(interval)
 
 
-def right_left(rect: Rectangle, to: tuple, step=.1, interval=.001):
+def right_left(rect: Rectangle, to: tuple, step: float = .1, interval: float = .001):
     new_step = step
     if to[0] < rect.get_x():
         new_step *= -1
@@ -127,7 +129,7 @@ def right_left(rect: Rectangle, to: tuple, step=.1, interval=.001):
         plt.pause(interval)
 
 
-def move_to(rect: Rectangle, to: tuple, step=.1, interval=.001, show_animation=True):
+def move_to(rect: Rectangle, to: tuple, step: float = .1, interval: float = .001, show_animation: bool = True):
     if show_animation:
         if abs(rect.get_x() - to[0]) < .001:
             if not abs(rect.get_y() - to[1]) < .001:

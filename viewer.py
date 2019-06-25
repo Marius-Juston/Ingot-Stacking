@@ -91,7 +91,7 @@ class Viewer:
 
         for i in range(self.number_of_shelves):
             self.ax.plot([0, w], [y, y], c='r')
-            self.shelves.append([w, self.air_gap_width, y, []])
+            self.shelves.append([w - self.air_gap_width, self.air_gap_width, y, []])
             y += h
 
         self.ax.plot([0, 0], [0, y], c='r')

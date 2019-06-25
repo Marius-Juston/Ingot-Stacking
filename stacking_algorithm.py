@@ -10,9 +10,6 @@ class Stacker(ABC):
         self.shelves = shelves
         self.gap_width = gap_width
 
-        for i in range(len(shelves)):
-            shelves[i][0] = shelves[i][0] - gap_width
-
     def setup(self, ingots: list):
         pass
 
